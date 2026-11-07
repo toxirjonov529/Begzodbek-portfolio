@@ -1,0 +1,602 @@
+```html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Begzod Toxirjonov | Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root {
+  --bg: #080b14;
+  --card: #101624;
+  --text: #f4f6ff;
+  --muted: #929bb0;
+  --blue: #477bff;
+  --purple: #9564ff;
+  --border: rgba(255,255,255,.09);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+a { color:inherit; text-decoration:none; }
+button { font:inherit; }
+.container { width:min(1160px,90%); margin:auto; }
+
+/* Fon effektlari */
+body::before, body::after {
+  content:"";
+  position:fixed;
+  width:420px;height:420px;
+  border-radius:50%;
+  filter:blur(130px);
+  opacity:.17;
+  pointer-events:none;
+  z-index:-1;
+}
+body::before { background:#285dff; top:-180px;left:-160px; }
+body::after { background:#8b35ff;right:-180px;top:380px; }
+
+/* Header */
+header {
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,11,20,.83);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav {
+  height:82px;display:flex;align-items:center;
+  justify-content:space-between;
+}
+.logo { font-size:23px;font-weight:900;letter-spacing:-1px; }
+.logo span { color:var(--blue); }
+.nav-links { display:flex;gap:30px;align-items:center; }
+.nav-links a { color:#b6bfd1;font-size:13px;transition:.25s; }
+.nav-links a:hover { color:white; }
+.nav-right { display:flex;gap:12px;align-items:center; }
+.lang-btn,.menu-btn {
+  border:1px solid var(--border);background:#121a2b;
+  color:white;padding:10px 14px;border-radius:10px;cursor:pointer;
+}
+.cv-btn {
+  padding:11px 17px;border-radius:10px;
+  background:linear-gradient(110deg,var(--blue),var(--purple));
+  font-size:12px;font-weight:700;
+}
+.menu-btn { display:none; }
+
+/* Hero */
+.hero {
+  min-height:650px;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:35px;padding:75px 0 65px;
+}
+.availability {
+  display:inline-flex;align-items:center;gap:9px;
+  color:#9ca9c3;background:#121a29;
+  border:1px solid var(--border);
+  padding:9px 14px;border-radius:30px;font-size:11px;
+  margin-bottom:27px;
+}
+.dot { width:8px;height:8px;border-radius:50%;background:#38df9a;box-shadow:0 0 12px #38df9a; }
+.hero h1 {
+  font-size:clamp(42px,6vw,68px);
+  line-height:1.08;letter-spacing:-3px;font-weight:900;
+}
+.hero h1 span {
+  background:linear-gradient(100deg,#5794ff,#a77aff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.role { font-size:20px;color:#aeb9d0;margin:18px 0; }
+.hero-desc { color:var(--muted);font-size:14px;line-height:1.9;max-width:510px; }
+.hero-actions { display:flex;gap:13px;margin-top:30px;flex-wrap:wrap; }
+.primary-btn,.secondary-btn {
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 20px;border-radius:10px;font-size:13px;font-weight:700;
+  transition:.25s;
+}
+.primary-btn { background:linear-gradient(110deg,var(--blue),var(--purple)); }
+.secondary-btn { border:1px solid var(--border);background:#111827; }
+.primary-btn:hover,.secondary-btn:hover { transform:translateY(-4px); }
+.socials { display:flex;gap:17px;margin-top:30px; }
+.socials a {
+  width:39px;height:39px;border:1px solid var(--border);
+  border-radius:11px;display:grid;place-items:center;
+  color:#aab5ca;transition:.25s;
+}
+.socials a:hover { color:white;background:#202c45;border-color:#648aff; }
+
+/* Hero rasm */
+.hero-visual { position:relative;min-height:480px;display:grid;place-items:center; }
+.glow {
+  position:absolute;width:370px;height:370px;border-radius:50%;
+  background:linear-gradient(140deg,#2867ff,#963eff);
+  filter:blur(95px);opacity:.28;
+}
+.photo-frame {
+  width:min(100%,450px);height:460px;
+  position:relative;z-index:1;
+  border:1px solid rgba(125,151,255,.35);
+  border-radius:25px;overflow:hidden;
+  background:linear-gradient(145deg,#1c2b48,#111827 60%,#28184a);
+  box-shadow:0 25px 80px rgba(0,0,0,.4);
+}
+.photo-frame img {
+  width:100%;height:100%;object-fit:cover;object-position:center;
+}
+.photo-caption {
+  position:absolute;bottom:17px;left:17px;right:17px;
+  padding:15px;background:rgba(7,11,22,.78);
+  backdrop-filter:blur(12px);border:1px solid var(--border);
+  border-radius:13px;
+}
+.photo-caption strong { display:block;font-size:13px; }
+.photo-caption small { display:block;color:#aab5ca;margin-top:5px;font-size:11px; }
+.float-card {
+  position:absolute;z-index:2;background:#141d30;
+  border:1px solid var(--border);padding:13px 16px;
+  border-radius:13px;box-shadow:0 15px 40px #0006;
+  font-size:12px;
+}
+.float-card i { color:#65a0ff;margin-right:7px; }
+.float-one { top:65px;left:-15px; }
+.float-two { bottom:65px;right:-15px; }
+
+/* Umumiy bo'limlar */
+section { padding:85px 0; }
+.section-head { margin-bottom:35px; }
+.eyebrow { color:#7fa5ff;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase; }
+.section-head h2 { font-size:36px;letter-spacing:-1.5px;margin-top:12px; }
+.section-head p { color:var(--muted);font-size:13px;margin-top:12px;line-height:1.8; }
+.about-grid { display:grid;grid-template-columns:1fr 1fr;gap:25px; }
+.panel {
+  background:linear-gradient(145deg,rgba(20,29,47,.9),rgba(13,19,32,.9));
+  border:1px solid var(--border);border-radius:18px;padding:27px;
+}
+.panel h3 { font-size:17px;margin-bottom:15px; }
+.panel p { color:var(--muted);font-size:13px;line-height:1.9; }
+.info-list { display:grid;gap:15px;margin-top:20px; }
+.info-item { display:flex;gap:12px;color:#c1cbe0;font-size:12px; }
+.info-item i { color:#7da3ff;width:17px; }
+
+/* Skills */
+.skills-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:15px; }
+.skill {
+  background:var(--card);border:1px solid var(--border);
+  padding:22px;border-radius:15px;transition:.25s;
+}
+.skill:hover { transform:translateY(-5px);border-color:#537cff; }
+.skill i { font-size:25px;color:#76a1ff;margin-bottom:16px; }
+.skill h3 { font-size:14px; }
+.skill p { font-size:11px;color:var(--muted);margin-top:7px; }
+
+/* Projects */
+.projects-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:22px; }
+.project {
+  background:var(--card);border:1px solid var(--border);
+  border-radius:17px;overflow:hidden;transition:.3s;
+}
+.project:hover { transform:translateY(-6px);border-color:#557cff; }
+.project-image { height:220px;overflow:hidden;background:#151f34; }
+.project-image img { width:100%;height:100%;object-fit:cover;transition:.5s; }
+.project:hover .project-image img { transform:scale(1.05); }
+.project-info { padding:21px; }
+.project-info h3 { font-size:17px; }
+.project-info p { color:var(--muted);font-size:12px;line-height:1.7;margin:10px 0 17px; }
+.tags { display:flex;gap:7px;flex-wrap:wrap; }
+.tags span { background:#1b2942;color:#a9c4ff;padding:6px 9px;border-radius:6px;font-size:10px; }
+.project-link { display:inline-flex;gap:8px;margin-top:17px;color:#83a8ff;font-size:12px;font-weight:700; }
+
+/* Education */
+.edu-card {
+  display:flex;gap:20px;align-items:flex-start;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:25px;
+}
+.edu-icon {
+  min-width:48px;height:48px;border-radius:13px;
+  display:grid;place-items:center;background:#1c2b4b;color:#8bb0ff;font-size:20px;
+}
+.edu-card h3 { font-size:16px; }
+.edu-card p { color:var(--muted);font-size:12px;margin-top:9px;line-height:1.7; }
+
+/* Contact */
+.contact-grid { display:grid;grid-template-columns:.8fr 1.2fr;gap:22px; }
+.contact-item {
+  display:flex;align-items:center;gap:14px;padding:15px 0;
+  border-bottom:1px solid var(--border);
+}
+.contact-item:last-child { border:0; }
+.contact-icon {
+  width:42px;height:42px;display:grid;place-items:center;
+  background:#1c2b4b;color:#8eb0ff;border-radius:11px;
+}
+.contact-item small { display:block;color:var(--muted);font-size:10px;margin-bottom:5px; }
+.contact-item strong { font-size:12px;word-break:break-word; }
+.contact-form { display:grid;gap:13px; }
+.contact-form input,.contact-form textarea {
+  width:100%;padding:14px 15px;background:#0b1220;
+  border:1px solid var(--border);border-radius:10px;
+  color:white;outline:none;font-family:inherit;font-size:12px;
+}
+.contact-form input:focus,.contact-form textarea:focus { border-color:#648aff; }
+.contact-form textarea { min-height:120px;resize:vertical; }
+.contact-form button {
+  border:0;color:white;cursor:pointer;justify-content:center;
+}
+
+/* Footer */
+footer { border-top:1px solid var(--border);padding:25px 0;color:var(--muted);font-size:11px; }
+.footer-inner { display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap; }
+.reveal { opacity:0;transform:translateY(22px);transition:.7s ease; }
+.reveal.show { opacity:1;transform:translateY(0); }
+
+@media(max-width:850px) {
+  .nav-links {
+    display:none;position:absolute;top:82px;left:0;right:0;
+    background:#0d1422;padding:25px;flex-direction:column;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-links.active { display:flex; }
+  .menu-btn { display:block; }
+  .hero { grid-template-columns:1fr;text-align:center;padding-top:55px; }
+  .hero-desc { margin:auto; }
+  .hero-actions,.socials { justify-content:center; }
+  .hero-visual { margin-top:25px; }
+  .float-one { left:0; }.float-two { right:0; }
+}
+@media(max-width:600px) {
+  .nav { height:70px; }
+  .logo { font-size:19px; }
+  .cv-btn { display:none; }
+  .nav-links { top:70px; }
+  .hero h1 { font-size:43px;letter-spacing:-2px; }
+  .role { font-size:16px; }
+  .hero-visual { min-height:390px; }
+  .photo-frame { height:370px; }
+  .glow { width:280px;height:280px; }
+  .float-card { font-size:10px;padding:10px; }
+  section { padding:65px 0; }
+  .section-head h2 { font-size:29px; }
+  .about-grid,.projects-grid,.contact-grid { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
+  .project-image { height:190px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a href="#home" class="logo">BEGZOD<span>.</span>DEV</a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Bosh sahifa</a>
+      <a href="#about">Men haqimda</a>
+      <a href="#skills">Ko‘nikmalar</a>
+      <a href="#projects">Loyihalar</a>
+      <a href="#contact">Aloqa</a>
+    </nav>
+
+    <div class="nav-right">
+      <a class="cv-btn" href="#contact"><i class="fa-solid fa-paper-plane"></i> Bog‘lanish</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menyuni ochish"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="container hero" id="home">
+    <div class="hero-content reveal">
+      <div class="availability"><span class="dot"></span> Yangi imkoniyatlarga ochiqman</div>
+
+      <h1>Salom, men<br><span>Begzod Toxirjonov</span></h1>
+      <div class="role">Frontend Developer</div>
+
+      <p class="hero-desc">
+        Zamonaviy, tezkor va foydalanuvchilar uchun qulay veb-saytlar
+        yaratishga qiziqaman. G‘oyalarni chiroyli va ishlaydigan
+        raqamli mahsulotlarga aylantiraman.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="primary-btn">Loyihalarim <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#contact" class="secondary-btn">Men bilan bog‘laning</a>
+      </div>
+
+      <div class="socials">
+        <a href="https://github.com/toxirjonov529" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://t.me/+Qr4BG5sMtCo1ODMy" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="mailto:toxirjonovbegzod12@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="glow"></div>
+      <div class="float-card float-one"><i class="fa-solid fa-code"></i> Frontend Developer</div>
+
+      <div class="photo-frame">
+        <!-- O'ZINGIZNING KOMPYUTER OLDIDAGI RASMINGIZNI SHU NOM BILAN SAQLANG -->
+        <img src="begzod-kompyuter.png"
+             alt="Begzod kompyuter qarshisida"
+             onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(145deg,#20375e,#111827 60%,#34205c)';">
+        <div class="photo-caption">
+          <strong>Begzod Toxirjonov</strong>
+          <small>Frontend Developer · Uzbekistan</small>
+        </div>
+      </div>
+
+      <div class="float-card float-two"><i class="fa-brands fa-js"></i> JavaScript Developer</div>
+    </div>
+  </section>
+
+  <section class="container" id="about">
+    <div class="section-head reveal">
+      <div class="eyebrow">01 — Men haqimda</div>
+      <h2>Men haqimda</h2>
+      <p>Men kimman va nimalar bilan shug‘ullanaman?</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="panel reveal">
+        <h3><i class="fa-solid fa-user-astronaut" style="color:#80a7ff"></i> Dasturchi haqida</h3>
+        <p>
+          Men Begzod Toxirjonov — Frontend dasturlash yo‘nalishida
+          rivojlanayotgan dasturchiman. Asosiy maqsadim zamonaviy
+          dizayn, sifatli kod va qulay interfeyslarni birlashtirib,
+          foydali veb-loyihalar yaratish.
+        </p>
+      </div>
+
+      <div class="panel reveal">
+        <h3><i class="fa-solid fa-address-card" style="color:#80a7ff"></i> Shaxsiy ma’lumotlar</h3>
+        <div class="info-list">
+          <div class="info-item"><i class="fa-solid fa-graduation-cap"></i> Renessans universiteti — 3-kurs</div>
+          <div class="info-item"><i class="fa-solid fa-laptop-code"></i> Axborot tizimlari va texnologiyalari</div>
+          <div class="info-item"><i class="fa-solid fa-location-dot"></i> O‘zbekiston</div>
+          <div class="info-item"><i class="fa-solid fa-envelope"></i> toxirjonovbegzod12@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="skills">
+    <div class="section-head reveal">
+      <div class="eyebrow">02 — Texnologiyalar</div>
+      <h2>Ko‘nikmalarim</h2>
+      <p>Veb-dasturlashda foydalanadigan asosiy texnologiyalarim.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill reveal"><i class="fa-brands fa-html5"></i><h3>HTML5</h3><p>Web sahifa tuzilishi</p></div>
+      <div class="skill reveal"><i class="fa-brands fa-css3-alt"></i><h3>CSS3</h3><p>Dizayn va animatsiyalar</p></div>
+      <div class="skill reveal"><i class="fa-brands fa-js"></i><h3>JavaScript</h3><p>Interaktiv funksiyalar</p></div>
+      <div class="skill reveal"><i class="fa-brands fa-git-alt"></i><h3>Git</h3><p>Versiyalarni boshqarish</p></div>
+      <div class="skill reveal"><i class="fa-brands fa-github"></i><h3>GitHub</h3><p>Loyihalarni joylash</p></div>
+      <div class="skill reveal"><i class="fa-solid fa-mobile-screen"></i><h3>Responsive</h3><p>Mobil qurilmalarga moslash</p></div>
+      <div class="skill reveal"><i class="fa-solid fa-palette"></i><h3>UI Design</h3><p>Zamonaviy interfeyslar</p></div>
+      <div class="skill reveal"><i class="fa-solid fa-code"></i><h3>Frontend</h3><p>Web dasturlash</p></div>
+    </div>
+  </section>
+
+  <section class="container" id="projects">
+    <div class="section-head reveal">
+      <div class="eyebrow">03 — Portfolio</div>
+      <h2>So‘nggi loyihalarim</h2>
+      <p>Amaliyot davomida yaratgan veb-loyihalarim bilan tanishing.</p>
+    </div>
+
+    <div class="projects-grid">
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900" alt="Kiyim do‘koni loyihasi">
+        </div>
+        <div class="project-info">
+          <h3>Online kiyim do‘koni</h3>
+          <p>Zamonaviy kiyimlar katalogi va mahsulotlar taqdimoti.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/o-nlen-kiyim-dokon/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900" alt="Web loyiha">
+        </div>
+        <div class="project-info">
+          <h3>Web loyiha</h3>
+          <p>Foydalanuvchilar uchun yaratilgan zamonaviy veb-sahifa.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjon529.github.io/loyiha/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900" alt="Auto Premium">
+        </div>
+        <div class="project-info">
+          <h3>Auto Premium</h3>
+          <p>Avtomobillar uchun premium uslubdagi veb-sayt.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/Auto-premyum/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900" alt="Travel sayohat">
+        </div>
+        <div class="project-info">
+          <h3>Travel — Sayohat</h3>
+          <p>Sayohat yo‘nalishlari va turistik manzillar taqdimoti.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/Trevel-sayoxat/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=900" alt="Elektronika do‘koni">
+        </div>
+        <div class="project-info">
+          <h3>Elektronika do‘koni</h3>
+          <p>Elektron qurilmalar va texnika mahsulotlari katalogi.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/elektronik-dokon/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900" alt="Uy joy platformasi">
+        </div>
+        <div class="project-info">
+          <h3>Uy-joy platformasi</h3>
+          <p>Uylar va ko‘chmas mulklarni namoyish qilish platformasi.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/Uy-joy-platformasi/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900" alt="Fitness zal">
+        </div>
+        <div class="project-info">
+          <h3>Fitness zal</h3>
+          <p>Sport va fitness markazi uchun zamonaviy veb-sayt.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/Fitnes-zal/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900" alt="Bilim Nuri">
+        </div>
+        <div class="project-info">
+          <h3>Bilim Nuri</h3>
+          <p>Ta’lim va bilim olishga yo‘naltirilgan veb-loyiha.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="https://toxirjonov529.github.io/Bilim-Nuri/" target="_blank">Loyihani ko‘rish <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container" id="education">
+    <div class="section-head reveal">
+      <div class="eyebrow">04 — Ta’lim</div>
+      <h2>Ta’lim yo‘nalishim</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div>
+        <h3>Renessans universiteti</h3>
+        <p>Axborot tizimlari va texnologiyalari</p>
+        <p>3-kurs · O‘zbekiston</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="contact">
+    <div class="section-head reveal">
+      <div class="eyebrow">05 — Aloqa</div>
+      <h2>Men bilan bog‘laning</h2>
+      <p>Hamkorlik yoki loyiha bo‘yicha takliflaringiz bo‘lsa, yozing.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="panel reveal">
+        <h3>Aloqa ma’lumotlari</h3>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div><small>Email</small><strong>toxirjonovbegzod12@gmail.com</strong></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+          <div><small>GitHub</small><strong>github.com/toxirjonov529</strong></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-brands fa-telegram"></i></div>
+          <div><small>Telegram</small><strong>Telegram kanal</strong></div>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <h3>Xabar yuborish</h3>
+        <form class="contact-form" id="contactForm">
+          <input id="visitorName" type="text" placeholder="Ismingiz" required>
+          <input id="visitorEmail" type="email" placeholder="Email manzilingiz" required>
+          <textarea id="visitorMessage" placeholder="Xabaringiz..." required></textarea>
+          <button class="primary-btn" type="submit">Telegram orqali yuborish <i class="fa-brands fa-telegram"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Begzod Toxirjonov. Barcha huquqlar himoyalangan.</span>
+    <span>Designed & Developed with <i class="fa-solid fa-heart" style="color:#8b70ff"></i></span>
+  </div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+  menuBtn.innerHTML = navLinks.classList.contains("active")
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => navLinks.classList.remove("active"));
+});
+
+// Bo'limlar ekranga kirganda sekin paydo bo'ladi
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(item => observer.observe(item));
+
+// Xabarni Telegram kanaliga emas, shaxsiy emailingizga yuborish uchun
+// keyin haqiqiy backend yoki forma xizmati ulash kerak.
+// Hozircha tugma Telegram profilingiz/kanalingizni ochadi.
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("visitorName").value.trim();
+  const email = document.getElementById("visitorEmail").value.trim();
+  const message = document.getElementById("visitorMessage").value.trim();
+
+  const text = `Salom, Begzod!\nIsm: ${name}\nEmail: ${email}\nXabar: ${message}`;
+  const telegramUrl = "https://t.me/share/url?url=" +
+    encodeURIComponent("https://t.me/+Qr4BG5sMtCo1ODMy") +
+    "&text=" + encodeURIComponent(text);
+
+  window.open(telegramUrl, "_blank");
+});
+</script>
+</body>
+</html>
+```
